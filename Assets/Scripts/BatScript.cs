@@ -25,16 +25,16 @@ public class BatScript : MonoBehaviour
     //Objects inside bat area variables//
     public int objCount;
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.gameObject.layer == 6)
+        if (collider.gameObject.layer == 6)
         {
             objCount++;
         }
     }
-    public void OnTriggerExit2D(Collider2D collision)
+    public void OnTriggerExit2D(Collider2D collider)
     {
-        if (collision.gameObject.layer == 6)
+        if (collider.gameObject.layer == 6)
         {
             objCount--;
         }
