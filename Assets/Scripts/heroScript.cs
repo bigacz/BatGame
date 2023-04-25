@@ -9,6 +9,7 @@ public class heroScript : MonoBehaviour
     public Camera cam;
     public Vector2 mousePosition;
     private Vector2 lookDirection;
+    public int health;
     
     
     void Start()

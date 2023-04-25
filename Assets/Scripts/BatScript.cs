@@ -8,7 +8,6 @@ using UnityEngine.Scripting;
 public class BatScript : MonoBehaviour
 {
     public GameObject bat;
-    public GameObject ball;
     public GameObject hero;
 
     // Hit interval timer variables//
