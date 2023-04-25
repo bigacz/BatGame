@@ -23,7 +23,7 @@ public class enemyScript : MonoBehaviour
 
     void Start()
     {
-
+        hero = GameObject.Find("Hero");
     }
 
     void Update()
