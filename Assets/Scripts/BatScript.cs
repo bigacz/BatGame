@@ -9,6 +9,7 @@ public class BatScript : MonoBehaviour
 {
     public GameObject bat;
     public GameObject ball;
+    public GameObject hero;
 
     public float force;
 
@@ -24,6 +25,9 @@ public class BatScript : MonoBehaviour
 
     //Objects inside bat area variables//
     public int objCount;
+    public Vector2 colliderPosition;
+    public Vector2 punchDirection;
+    public float punchAngle;
 
     public void OnTriggerEnter2D(Collider2D collider)
     {
@@ -34,6 +38,7 @@ public class BatScript : MonoBehaviour
     }
     public void OnTriggerExit2D(Collider2D collider)
     {
+
         if (collider.gameObject.layer == 6)
         {
             objCount--;
@@ -69,7 +74,7 @@ public class BatScript : MonoBehaviour
             {
                 isHitTimer = false;
                 hitTimer = hitDuration;
-                bat.GetComponent<AreaEffector2D>().forceMagnitude = 0;
+                bat.GetComponent<BoxCollider2D>().enabled = false;
             }
         }
 
@@ -83,10 +88,9 @@ public class BatScript : MonoBehaviour
                 {
                     ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 }
-                bat.GetComponent<AreaEffector2D>().forceMagnitude = force;
+                bat.GetComponent<BoxCollider2D>().enabled = true;
                 isIntTimer = true;
                 isHitTimer = true;
-                Debug.Log("jeb");
             }
         }
         else
