@@ -21,12 +21,16 @@ public class BatScript : MonoBehaviour
     private float hitTimer;
     private bool isHitTimer = false;
 
+    private Animator batAnim;
+    public AudioSource hitSFX;
+    public AudioSource swingSFX;
 
 
     public void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.layer == 6)
         {
+            hitSFX.Play();
             collider.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
@@ -39,6 +43,7 @@ public class BatScript : MonoBehaviour
     {
         intervalTimer = hitInterval;
         hitTimer = hitDuration;
+        batAnim = GetComponent<Animator>();
     }
 
     void Update()
@@ -71,6 +76,8 @@ public class BatScript : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
+                swingSFX.Play();
+                batAnim.SetTrigger("TrOpen");
                 bat.GetComponent<BoxCollider2D>().enabled = true;
                 isIntTimer = true;
                 isHitTimer = true;
