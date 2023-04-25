@@ -11,8 +11,6 @@ public class BatScript : MonoBehaviour
     public GameObject ball;
     public GameObject hero;
 
-    public float force;
-
     // Hit interval timer variables//
     public float hitInterval;
     private float intervalTimer;
@@ -23,26 +21,18 @@ public class BatScript : MonoBehaviour
     private float hitTimer;
     private bool isHitTimer = false;
 
-    //Objects inside bat area variables//
-    public int objCount;
-    public Vector2 colliderPosition;
-    public Vector2 punchDirection;
-    public float punchAngle;
+
 
     public void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.layer == 6)
+        if(collider.gameObject.layer == 6)
         {
-            objCount++;
+            collider.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
     public void OnTriggerExit2D(Collider2D collider)
     {
 
-        if (collider.gameObject.layer == 6)
-        {
-            objCount--;
-        }
     }
 
     void Start()
@@ -56,10 +46,7 @@ public class BatScript : MonoBehaviour
         hit();
     }
 
-    public bool isEmpty()
-    {
-        return objCount == 0;
-    }
+
 
 
     private void hit()
@@ -84,10 +71,6 @@ public class BatScript : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (isEmpty() == false)
-                {
-                    ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                }
                 bat.GetComponent<BoxCollider2D>().enabled = true;
                 isIntTimer = true;
                 isHitTimer = true;
