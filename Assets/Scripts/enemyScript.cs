@@ -24,6 +24,8 @@ public class enemyScript : MonoBehaviour
     void Start()
     {
         hero = GameObject.Find("Hero");
+        Physics2D.IgnoreLayerCollision(7, 8);
+
     }
 
     void Update()

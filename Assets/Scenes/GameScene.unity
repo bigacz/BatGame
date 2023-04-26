@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 310114516}
   - component: {fileID: 310114519}
   - component: {fileID: 310114520}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -736,6 +736,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 9102623509827768492, guid: 93d9290e368aeae4aa4ec58c750cff1d, type: 3}
+  Timer: 0
+  spawnTime: 2
 --- !u!4 &1293163268
 Transform:
   m_ObjectHideFlags: 0
@@ -767,7 +769,7 @@ GameObject:
   - component: {fileID: 1651977556}
   - component: {fileID: 1651977557}
   - component: {fileID: 1651977558}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -897,7 +899,7 @@ AreaEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 64
   m_UseGlobalAngle: 0
   m_ForceAngle: 90
   m_ForceMagnitude: 90
@@ -1183,6 +1185,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5591735882564812640, guid: 93d9290e368aeae4aa4ec58c750cff1d, type: 3}
+      propertyPath: m_Radius
+      value: 0.18
+      objectReference: {fileID: 0}
     - target: {fileID: 9102623509827768489, guid: 93d9290e368aeae4aa4ec58c750cff1d, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1239,5 +1245,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 93d9290e368aeae4aa4ec58c750cff1d, type: 3}
