@@ -19,7 +19,8 @@ public class enemyLogic : MonoBehaviour
         Timer -= Time.deltaTime;
         if (Timer < 0)
         {
-            Instantiate(enemy);
+
+            Instantiate(enemy, new Vector3(Random.Range(-6.66f, 6.66f),5), Quaternion.identity);
             Timer = spawnTime;
         }
     }
