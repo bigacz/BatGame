@@ -9,7 +9,7 @@ public class heroScript : MonoBehaviour
     public Camera cam;
     public Vector2 mousePosition;
     private Vector2 lookDirection;
-    public int health;
+    public int health; 
     
     
     void Start()
@@ -70,5 +70,10 @@ public class heroScript : MonoBehaviour
         {
             hero.velocity = new Vector2(hero.velocity.x, 0);
         }
+    }
+
+    public void TakeDamage()
+    {
+        health--;
     }
 }

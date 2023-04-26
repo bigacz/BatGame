@@ -1,23 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 
 public class enemyScript : MonoBehaviour
-{
+{ 
     public GameObject bat;
     public GameObject hero;
 
     private Vector2 target;
     private Vector2 heroPos;
     public float speed;
+    
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.layer == 6)
         {
             Destroy(gameObject);
+        }
+        if (collider.gameObject.layer == 8)
+        {
+            hero.GetComponent<heroScript>().TakeDamage();
         }
     }
 
