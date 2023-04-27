@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Scripting;
 
-public class BatScript : MonoBehaviour
+public class batScript : MonoBehaviour
 {
     public GameObject bat;
     public GameObject hero;

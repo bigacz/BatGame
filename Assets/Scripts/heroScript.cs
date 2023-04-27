@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class heroScript : MonoBehaviour
 {
@@ -9,18 +11,17 @@ public class heroScript : MonoBehaviour
     public Camera cam;
     public Vector2 mousePosition;
     private Vector2 lookDirection;
-    public int health; 
-    
-    
-    void Start()
+    public int health;
+    public GameObject GameLogic;
+
+
+    public void Health(int GiveTake)
     {
-    
-    }
-
-
-    void Update()
-    {
-
+        health += GiveTake;
+        if (health <= 0)
+        {
+            GameLogic.GetComponent<GameLogicScript>().GameOver();
+        }
     }
 
     void FixedUpdate()
@@ -70,10 +71,5 @@ public class heroScript : MonoBehaviour
         {
             hero.velocity = new Vector2(hero.velocity.x, 0);
         }
-    }
-
-    public void TakeDamage()
-    {
-        health--;
     }
 }
