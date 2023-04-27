@@ -12,6 +12,7 @@ public class heroScript : MonoBehaviour
     public Vector2 mousePosition;
     private Vector2 lookDirection;
     public GameObject GameLogic;
+    public GameLogicScript gameLogicScript;
 
     public float MovementSpeed;
     public int health;
@@ -28,6 +29,7 @@ public class heroScript : MonoBehaviour
             if (GiveTake < 0)
             {
                 DamageTimer = DamageInterval;
+                gameLogicScript.HeartBar(false);
             }
         }
 
