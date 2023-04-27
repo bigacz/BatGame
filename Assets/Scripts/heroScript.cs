@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,20 +8,45 @@ using UnityEngine.UIElements;
 public class heroScript : MonoBehaviour
 {
     public Rigidbody2D hero;
-    public float MovementSpeed;
     public Camera cam;
     public Vector2 mousePosition;
     private Vector2 lookDirection;
-    public int health;
     public GameObject GameLogic;
+
+    public float MovementSpeed;
+    public int health;
+    public float DamageInterval;
+    public float DamageTimer;
+
 
 
     public void Health(int GiveTake)
     {
-        health += GiveTake;
+        if(DamageTimer <= 0)
+        {
+            health += GiveTake;
+            if (GiveTake < 0)
+            {
+                DamageTimer = DamageInterval;
+            }
+        }
+
         if (health <= 0)
         {
             GameLogic.GetComponent<GameLogicScript>().GameOver();
+        }
+    }
+
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+        if (DamageTimer > 0)
+        {
+            DamageTimer -= Time.deltaTime;
         }
     }
 
