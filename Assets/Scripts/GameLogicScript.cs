@@ -2,12 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameLogicScript : MonoBehaviour
 {
     public GameObject pauseMenu;
     public heroScript heroScript;
     public GameObject heartBar;
+    public GameObject xpFill;
+
+    public float Level;
+    public float xpNeeded;
+    public float xp;
+    public float xpMultiplier;
+
+    public void xpAdd(float xpToAdd)
+    {
+        xp += xpToAdd * xpMultiplier;
+        xpFill.GetComponent<Image>().fillAmount = xp / xpNeeded;
+        if (xp >= xpNeeded)
+        {
+            LevelUp();
+        }
+    }
+
+    private void LevelUp()
+    {       
+        xp = 0;
+        xpNeeded += 10;
+        Level++;
+    }
+
     public void GameOver()
     {
         pauseMenu.SetActive(true);
@@ -21,12 +46,8 @@ public class GameLogicScript : MonoBehaviour
 
     void Start()
     {
-        
+        xpNeeded = 100;
+        Level = 1;
     }
 
-    void Update()
-    {
-        
-    }
-    
 }

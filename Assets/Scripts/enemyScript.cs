@@ -9,6 +9,7 @@ public class enemyScript : MonoBehaviour
 { 
     public GameObject bat;
     public GameObject hero;
+    public GameLogicScript gameLogicScript;
 
     private Vector2 target;
     private Vector2 heroPos;
@@ -20,6 +21,7 @@ public class enemyScript : MonoBehaviour
         if (collider.gameObject.layer == 6)
         {
             Destroy(gameObject);
+            gameLogicScript.xpAdd(10);
         }
         if (collider.gameObject.layer == 8)
         {
@@ -30,6 +32,7 @@ public class enemyScript : MonoBehaviour
     void Start()
     {
         hero = GameObject.Find("Hero");
+        gameLogicScript = GameObject.Find("GameLogic").GetComponent<GameLogicScript>();
         Physics2D.IgnoreLayerCollision(7, 8);
         Physics2D.IgnoreLayerCollision(7, 6);
 

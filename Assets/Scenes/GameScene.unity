@@ -857,7 +857,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.839
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1368,6 +1368,9 @@ MonoBehaviour:
   pauseMenu: {fileID: 1459694403}
   heroScript: {fileID: 310114519}
   heartBar: {fileID: 2001964625}
+  xpNeeded: 0
+  xp: 0
+  xpMultiplier: 1
 --- !u!1 &1459694403
 GameObject:
   m_ObjectHideFlags: 0
