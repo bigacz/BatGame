@@ -20,26 +20,32 @@ public class batScript : MonoBehaviour
     private float hitTimer;
     private bool isHitTimer = false;
 
+    // Animation, SFX//
     private Animator batAnim;
     public AudioSource hitSFX;
     public AudioSource swingSFX;
-    public float hitAngle;
 
-    public Vector2 ballPosition;
+    public float hitForce;
+    public Vector2 ballPositon;
     public Vector2 hitDirection;
+    public float hitAngle;
 
     public void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.layer == 6)
         {
-            ballPosition = collider.transform.position;
-            hitDirection = ballPosition - hero.GetComponent<Rigidbody2D>().position;
-            hitAngle = Mathf.Atan2(hitDirection.y, hitDirection.x);
-            hitSFX.Play();
             collider.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            ballPositon = collider.transform.position;
+            hitDirection = ballPositon - hero.GetComponent<Rigidbody2D>().position;
+            hitAngle = Mathf.Atan2(hitDirection.y, hitDirection.x) * Mathf.Rad2Deg;
+            AddForceAtAngle(hitForce, hitAngle, collider.GetComponent<Rigidbody2D>());
+            hitSFX.Play();
         }
     }
+    public void OnTriggerExit2D(Collider2D collider)
+    {
 
+    }
 
     void Start()
     {
@@ -48,9 +54,24 @@ public class batScript : MonoBehaviour
         batAnim = GetComponent<Animator>();
     }
 
+    void Update()
+    {
+        hit();
+    }
+
+    private void AddForceAtAngle(float force, float angle, Rigidbody2D rb)
+    {
+        angle *= Mathf.Deg2Rad;
+        float xComponent = Mathf.Cos(angle) * force;
+        float yComponent = Mathf.Sin(angle) * force;
+        Vector2 forceApplied = new Vector2(xComponent, yComponent);
+
+        rb.AddForce(forceApplied);
+    }
+
+
     private void hit()
     {
-        Debug.Log("elo");
         if (isHitTimer == true)
         {
             if (hitTimer > 0)

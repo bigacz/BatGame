@@ -7,18 +7,14 @@ using UnityEngine.UI;
 public class GameLogicScript : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public heroScript heroScript;
     public GameObject heartBar;
     public GameObject xpFill;
-
-    public heroScript heroScript;
-    public enemyLogic enemyLogic;
-
 
     public float Level;
     public float xpNeeded;
     public float xp;
     public float xpMultiplier;
-    public float spawnTimePerLevel;
 
     public void xpAdd(float xpToAdd)
     {
@@ -35,7 +31,6 @@ public class GameLogicScript : MonoBehaviour
         xp = 0;
         xpNeeded += 10;
         Level++;
-        enemyLogic.spawnTime -= spawnTimePerLevel;
     }
 
     public void GameOver()
