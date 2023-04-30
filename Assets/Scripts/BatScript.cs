@@ -23,20 +23,23 @@ public class batScript : MonoBehaviour
     private Animator batAnim;
     public AudioSource hitSFX;
     public AudioSource swingSFX;
+    public float hitAngle;
 
+    public Vector2 ballPosition;
+    public Vector2 hitDirection;
 
     public void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.layer == 6)
         {
+            ballPosition = collider.transform.position;
+            hitDirection = ballPosition - hero.GetComponent<Rigidbody2D>().position;
+            hitAngle = Mathf.Atan2(hitDirection.y, hitDirection.x);
             hitSFX.Play();
             collider.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
-    public void OnTriggerExit2D(Collider2D collider)
-    {
 
-    }
 
     void Start()
     {
@@ -45,16 +48,9 @@ public class batScript : MonoBehaviour
         batAnim = GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        hit();
-    }
-
-
-
-
     private void hit()
     {
+        Debug.Log("elo");
         if (isHitTimer == true)
         {
             if (hitTimer > 0)

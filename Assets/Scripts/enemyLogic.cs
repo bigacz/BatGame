@@ -5,8 +5,11 @@ using UnityEngine;
 public class enemyLogic : MonoBehaviour
 {
     public GameObject enemy;
+    public GameLogicScript gameLogicScript;
+
     public float Timer;
     public float spawnTime;
+
     void Start()
     {
         Instantiate(enemy);

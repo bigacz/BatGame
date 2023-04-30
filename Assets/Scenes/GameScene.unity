@@ -857,7 +857,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1336,6 +1336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 9102623509827768492, guid: 93d9290e368aeae4aa4ec58c750cff1d, type: 3}
+  gameLogicScript: {fileID: 1293163269}
   Timer: 0
   spawnTime: 2
 --- !u!4 &1293163268
@@ -1366,11 +1367,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1459694403}
-  heroScript: {fileID: 310114519}
   heartBar: {fileID: 2001964625}
+  xpFill: {fileID: 708468091}
+  heroScript: {fileID: 310114519}
+  enemyLogic: {fileID: 1293163267}
+  Level: 0
   xpNeeded: 0
   xp: 0
   xpMultiplier: 1
+  spawnTimePerLevel: 0.5
 --- !u!1 &1459694403
 GameObject:
   m_ObjectHideFlags: 0
