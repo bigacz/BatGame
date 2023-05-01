@@ -12,7 +12,7 @@ public class GameLogicScript : MonoBehaviour
     public heroScript heroScript;
     public GameObject heartBar;
     public GameObject xpFill;
-    public GameObject levelText;
+    public GameObject levelText; 
 
     public int Level;
     private float xpNeeded;
@@ -27,6 +27,20 @@ public class GameLogicScript : MonoBehaviour
         {
             LevelUp();
         }
+    }
+
+    public GameObject golfBall;
+    public void addBall()
+    {
+        new Vector3(Random.Range(-6, 6), -1, 1);
+        Instantiate(golfBall);
+        afterLevelUp();
+    }
+
+    private void afterLevelUp()
+    {
+        Time.timeScale = 1.0f;
+        LevelUpMenu.SetActive(false);
     }
 
     private void LevelUp()

@@ -10,7 +10,9 @@ public class ballScript : MonoBehaviour
 
     void Start()
     {
-        Physics2D.IgnoreCollision(ball,hero);
+
+        Physics2D.IgnoreLayerCollision(8, 6);
+        Physics2D.IgnoreLayerCollision(6, 6);
     }
 
     void Update()
