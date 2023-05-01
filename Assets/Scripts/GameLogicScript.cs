@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,13 +8,15 @@ using UnityEngine.UI;
 public class GameLogicScript : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public GameObject LevelUpMenu;
     public heroScript heroScript;
     public GameObject heartBar;
     public GameObject xpFill;
+    public GameObject levelText;
 
-    public float Level;
-    public float xpNeeded;
-    public float xp;
+    public int Level;
+    private float xpNeeded;
+    private float xp;
     public float xpMultiplier;
 
     public void xpAdd(float xpToAdd)
@@ -31,6 +34,9 @@ public class GameLogicScript : MonoBehaviour
         xp = 0;
         xpNeeded += 10;
         Level++;
+        LevelUpMenu.SetActive(true);
+        levelText.GetComponent<TMPro.TextMeshProUGUI>().text = "Lvl." + Level;
+        Time.timeScale = 0f;
     }
 
     public void GameOver()
@@ -47,7 +53,7 @@ public class GameLogicScript : MonoBehaviour
     void Start()
     {
         xpNeeded = 100;
-        Level = 1;
+        Level = 0;
     }
 
 }

@@ -39,10 +39,7 @@ public class heroScript : MonoBehaviour
         }
     }
 
-    void Start()
-    {
 
-    }
 
     void Update()
     {

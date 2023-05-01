@@ -9,6 +9,7 @@ public class batScript : MonoBehaviour
 {
     public GameObject bat;
     public GameObject hero;
+    public GameObject heroBack;
 
     // Hit interval timer variables//
     public float hitInterval;
@@ -26,7 +27,7 @@ public class batScript : MonoBehaviour
     public AudioSource swingSFX;
 
     public float hitForce;
-    public Vector2 ballPositon;
+    public Vector3 ballPositon;
     public Vector2 hitDirection;
     public float hitAngle;
 
@@ -36,7 +37,7 @@ public class batScript : MonoBehaviour
         {
             collider.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             ballPositon = collider.transform.position;
-            hitDirection = ballPositon - hero.GetComponent<Rigidbody2D>().position;
+            hitDirection = ballPositon - heroBack.transform.position;
             hitAngle = Mathf.Atan2(hitDirection.y, hitDirection.x) * Mathf.Rad2Deg;
             AddForceAtAngle(hitForce, hitAngle, collider.GetComponent<Rigidbody2D>());
             hitSFX.Play();
