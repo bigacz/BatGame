@@ -25,7 +25,7 @@ public class enemyScript : MonoBehaviour
         }
         if (collider.gameObject.layer == 8)
         {
-            hero.GetComponent<heroScript>().Health(-1);
+            hero.GetComponent<heroScript>().HealthChange(-1);
         }
     }
 

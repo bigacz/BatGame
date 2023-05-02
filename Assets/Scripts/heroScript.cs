@@ -21,7 +21,7 @@ public class heroScript : MonoBehaviour
 
 
 
-    public void Health(int GiveTake)
+    public void HealthChange(int GiveTake)
     {
         if(DamageTimer <= 0)
         {
@@ -29,7 +29,11 @@ public class heroScript : MonoBehaviour
             if (GiveTake < 0)
             {
                 DamageTimer = DamageInterval;
-                gameLogicScript.HeartBar(false);
+                gameLogicScript.HeartBar(false, GiveTake);
+            }
+            else
+            {
+                gameLogicScript.HeartBar(true, GiveTake);
             }
         }
 

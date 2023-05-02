@@ -43,10 +43,6 @@ public class batScript : MonoBehaviour
             hitSFX.Play();
         }
     }
-    public void OnTriggerExit2D(Collider2D collider)
-    {
-
-    }
 
     void Start()
     {

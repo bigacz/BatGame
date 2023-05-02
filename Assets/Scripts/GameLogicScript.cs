@@ -12,7 +12,8 @@ public class GameLogicScript : MonoBehaviour
     public heroScript heroScript;
     public GameObject heartBar;
     public GameObject xpFill;
-    public GameObject levelText; 
+    public GameObject levelText;
+    public GameObject healHeart;
 
     public int Level;
     private float xpNeeded;
@@ -32,8 +33,15 @@ public class GameLogicScript : MonoBehaviour
     public GameObject golfBall;
     public void addBall()
     {
-        new Vector3(Random.Range(-6, 6), -1, 1);
-        Instantiate(golfBall);
+        Vector3 spawnLocation = new Vector3(Random.Range(-6, 6), -1, 1);
+        Instantiate(golfBall, spawnLocation, Quaternion.identity);
+        afterLevelUp();
+    }
+
+    public void addHeal()
+    {
+        Vector3 spawnLocation = new Vector3(Random.Range(-6, 6), Random.Range(1, 4.5f), 1);
+        Instantiate(healHeart, spawnLocation, Quaternion.identity);
         afterLevelUp();
     }
 
@@ -59,9 +67,16 @@ public class GameLogicScript : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void HeartBar(bool show)
+    public void HeartBar(bool show, int amount)
     {
-        heartBar.transform.GetChild(heroScript.health).gameObject.SetActive(show);
+        if(amount < 0)
+        {
+            heartBar.transform.GetChild(heroScript.health).gameObject.SetActive(show);
+        }
+        else
+        {
+            heartBar.transform.GetChild(heroScript.health -1).gameObject.SetActive(show);
+        }
     }
 
     void Start()
