@@ -10,6 +10,7 @@ public class batScript : MonoBehaviour
     public GameObject bat;
     public GameObject hero;
     public GameObject heroBack;
+    public GameLogicScript gameLogicScript;
 
     // Hit interval timer variables//
     public float hitInterval;
@@ -26,15 +27,26 @@ public class batScript : MonoBehaviour
     public AudioSource hitSFX;
     public AudioSource swingSFX;
 
+    // Bat physics //
     public float hitForce;
     public Vector3 ballPositon;
     public Vector2 hitDirection;
     public float hitAngle;
 
+    // Jumbotron //
+    public  int jumbotronMax;
+    private int jumbotronCount;
+
     public void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.layer == 6)
         {
+            jumbotronCount++;
+            if (jumbotronCount >= jumbotronMax)
+            {
+                gameLogicScript.Jumbotron();
+                jumbotronCount = 0;
+            }
             collider.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             ballPositon = collider.transform.position;
             hitDirection = ballPositon - heroBack.transform.position;
@@ -49,6 +61,7 @@ public class batScript : MonoBehaviour
         intervalTimer = hitInterval;
         hitTimer = hitDuration;
         batAnim = GetComponent<Animator>();
+        jumbotronMax = 131072;
     }
 
     void Update()
@@ -66,7 +79,6 @@ public class batScript : MonoBehaviour
         rb.AddForce(forceApplied);
     }
 
-
     private void hit()
     {
         if (isHitTimer == true)
@@ -82,8 +94,6 @@ public class batScript : MonoBehaviour
                 bat.GetComponent<BoxCollider2D>().enabled = false;
             }
         }
-
-
 
         if (isIntTimer == false)
         {

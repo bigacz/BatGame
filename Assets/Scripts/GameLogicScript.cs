@@ -7,14 +7,17 @@ using UnityEngine.UI;
 
 public class GameLogicScript : MonoBehaviour
 {
+    public heroScript heroScript;
     public GameObject pauseMenu;
     public GameObject LevelUpMenu;
-    public heroScript heroScript;
     public GameObject heartBar;
     public GameObject xpFill;
     public GameObject levelText;
     public GameObject healHeart;
     public GameObject Balls;
+    public GameObject golfBall;
+    public GameObject enemies;
+    public GameObject bat;
 
     public int Level;
     private float xpNeeded;
@@ -23,6 +26,32 @@ public class GameLogicScript : MonoBehaviour
 
     public Vector3 scaleChange;
 
+    // Jumbotron //
+    private bool Added;
+
+    public void addJumbotron()
+    {
+
+        if (Added == true)
+        {
+            bat.GetComponent<batScript>().jumbotronMax--;
+        }
+        else
+        {
+            bat.GetComponent<batScript>().jumbotronMax = 10;
+            Added = true;
+        }
+        afterLevelUp();
+    }
+    
+    public void Jumbotron()
+    {
+        int enemiesCount = enemies.transform.childCount;
+        for (int i = 0; i < enemiesCount; i++)
+        {
+            Destroy(enemies.transform.GetChild(i).gameObject);
+        }
+    }
 
     public void xpAdd(float xpToAdd)
     {
@@ -46,7 +75,6 @@ public class GameLogicScript : MonoBehaviour
 
     }
 
-    public GameObject golfBall;
     public void addBall()
     {
         Vector3 spawnLocation = new Vector3(Random.Range(-6, 6), -1, 1);
