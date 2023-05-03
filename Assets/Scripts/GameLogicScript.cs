@@ -14,11 +14,15 @@ public class GameLogicScript : MonoBehaviour
     public GameObject xpFill;
     public GameObject levelText;
     public GameObject healHeart;
+    public GameObject Balls;
 
     public int Level;
     private float xpNeeded;
     private float xp;
     public float xpMultiplier;
+
+    public Vector3 scaleChange;
+
 
     public void xpAdd(float xpToAdd)
     {
@@ -30,11 +34,23 @@ public class GameLogicScript : MonoBehaviour
         }
     }
 
+    public void enlargeBalls()
+    {
+        golfBall.transform.localScale += scaleChange;
+        int max = Balls.transform.childCount;
+        for (int i = 0; i < max; i++)
+        {
+            Balls.gameObject.transform.GetChild(i).gameObject.transform.localScale += scaleChange;
+            afterLevelUp();
+        }
+
+    }
+
     public GameObject golfBall;
     public void addBall()
     {
         Vector3 spawnLocation = new Vector3(Random.Range(-6, 6), -1, 1);
-        Instantiate(golfBall, spawnLocation, Quaternion.identity);
+        Instantiate(golfBall, spawnLocation, Quaternion.identity, Balls.transform);
         afterLevelUp();
     }
 
@@ -48,6 +64,7 @@ public class GameLogicScript : MonoBehaviour
     private void afterLevelUp()
     {
         Time.timeScale = 1.0f;
+        xpFill.GetComponent<Image>().fillAmount = xp / xpNeeded;
         LevelUpMenu.SetActive(false);
     }
 
@@ -81,6 +98,7 @@ public class GameLogicScript : MonoBehaviour
 
     void Start()
     {
+        golfBall.transform.localScale = new Vector3(1.25f, 1.25f, 1);
         xpNeeded = 100;
         Level = 0;
     }

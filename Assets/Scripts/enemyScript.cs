@@ -11,7 +11,7 @@ public class enemyScript : MonoBehaviour
     public GameObject hero;
     public GameLogicScript gameLogicScript;
 
-    private Vector2 target;
+
     private Vector2 heroPos;
     public float speed;
     
@@ -46,7 +46,6 @@ public class enemyScript : MonoBehaviour
     private void EnemyMovement()
     {
         float step = speed * Time.deltaTime;
-        target = new Vector2(0.0f, 0.0f);
         heroPos = new Vector2(hero.transform.position.x, hero.transform.position.y);
         transform.position = Vector2.MoveTowards(transform.position, heroPos, step);
     }
