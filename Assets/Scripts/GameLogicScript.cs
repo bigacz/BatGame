@@ -29,27 +29,23 @@ public class GameLogicScript : MonoBehaviour
     // Jumbotron //
     private bool Added;
 
-    public void addJumbotron()
-    {
+    // Levels //
+    public List<string> AbilitiesLevels = new List<string>();
 
-        if (Added == true)
-        {
-            bat.GetComponent<batScript>().jumbotronMax--;
-        }
-        else
-        {
-            bat.GetComponent<batScript>().jumbotronMax = 10;
-            Added = true;
-        }
-        afterLevelUp();
+    public string RandomLevel(List<string> Abilities)
+    {
+        Random.Range(0, Abilities.Count);
+
+        return "elo";
     }
-    
+
     public void Jumbotron()
     {
         int enemiesCount = enemies.transform.childCount;
         for (int i = 0; i < enemiesCount; i++)
         {
             Destroy(enemies.transform.GetChild(i).gameObject);
+            xpAdd(10);
         }
     }
 
@@ -63,7 +59,7 @@ public class GameLogicScript : MonoBehaviour
         }
     }
 
-    public void enlargeBalls()
+    public void levelSize()
     {
         golfBall.transform.localScale += scaleChange;
         int max = Balls.transform.childCount;
@@ -75,18 +71,49 @@ public class GameLogicScript : MonoBehaviour
 
     }
 
-    public void addBall()
+    public void levelJumbotron()
+    {
+
+        if (Added == true)
+        {
+            bat.GetComponent<batScript>().jumbotronMax--;
+        }
+        else
+        {
+            bat.GetComponent<batScript>().jumbotronMax = 10;
+            Added = true;
+        }
+        afterLevelUp();
+    }
+
+    public void levelMovement()
+    {
+        heroScript.MovementSpeed = (heroScript.MovementSpeed / 100) * 107;
+        afterLevelUp();
+    }
+
+    public void levelBalls()
     {
         Vector3 spawnLocation = new Vector3(Random.Range(-6, 6), -1, 1);
         Instantiate(golfBall, spawnLocation, Quaternion.identity, Balls.transform);
         afterLevelUp();
     }
 
-    public void addHeal()
+    public void levelHeal()
     {
         Vector3 spawnLocation = new Vector3(Random.Range(-6, 6), Random.Range(1, 4.5f), 1);
         Instantiate(healHeart, spawnLocation, Quaternion.identity);
         afterLevelUp();
+    }
+
+    private void LevelUp()
+    {
+        xp = 0;
+        xpNeeded += 10;
+        Level++;
+        LevelUpMenu.SetActive(true);
+        levelText.GetComponent<TMPro.TextMeshProUGUI>().text = "Lvl." + Level;
+        Time.timeScale = 0f;
     }
 
     private void afterLevelUp()
@@ -94,16 +121,6 @@ public class GameLogicScript : MonoBehaviour
         Time.timeScale = 1.0f;
         xpFill.GetComponent<Image>().fillAmount = xp / xpNeeded;
         LevelUpMenu.SetActive(false);
-    }
-
-    private void LevelUp()
-    {       
-        xp = 0;
-        xpNeeded += 10;
-        Level++;
-        LevelUpMenu.SetActive(true);
-        levelText.GetComponent<TMPro.TextMeshProUGUI>().text = "Lvl." + Level;
-        Time.timeScale = 0f;
     }
 
     public void GameOver()
@@ -114,13 +131,13 @@ public class GameLogicScript : MonoBehaviour
 
     public void HeartBar(bool show, int amount)
     {
-        if(amount < 0)
+        if (amount < 0)
         {
             heartBar.transform.GetChild(heroScript.health).gameObject.SetActive(show);
         }
         else
         {
-            heartBar.transform.GetChild(heroScript.health -1).gameObject.SetActive(show);
+            heartBar.transform.GetChild(heroScript.health - 1).gameObject.SetActive(show);
         }
     }
 
@@ -129,6 +146,30 @@ public class GameLogicScript : MonoBehaviour
         golfBall.transform.localScale = new Vector3(1.25f, 1.25f, 1);
         xpNeeded = 100;
         Level = 0;
+
+        LevelChances();
     }
 
+    private void LevelChances()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (i < 5)
+            {
+                AbilitiesLevels.Add("levelSize");
+                AbilitiesLevels.Add("levelJumbotron");
+                AbilitiesLevels.Add("levelMovement");
+                AbilitiesLevels.Add("levelBalls");
+                AbilitiesLevels.Add("levelHeal");
+            }
+            if (i < 4)
+            {
+
+            }
+            if (i < 3)
+            {
+
+            }
+        }
+    }
 }
