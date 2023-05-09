@@ -18,6 +18,7 @@ public class GameLogicScript : MonoBehaviour
     public GameObject golfBall;
     public GameObject enemies;
     public GameObject bat;
+    public GameObject firework;
 
     public int Level;
     private float xpNeeded;
@@ -27,7 +28,10 @@ public class GameLogicScript : MonoBehaviour
     public Vector3 scaleChange;
 
     // Jumbotron //
-    private bool Added;
+    private bool JumbotronAdded;
+
+    // Firework //
+    public bool FireworkAdded;
 
     // Levels //
     public List<string> AbilitiesLevels = new List<string>();
@@ -59,6 +63,20 @@ public class GameLogicScript : MonoBehaviour
         }
     }
 
+    public void levelFirework()
+    {
+
+        if (FireworkAdded == true)
+        {
+            firework.GetComponent<CircleCollider2D>().radius += 0.2f; 
+        }
+        else
+        {
+            FireworkAdded = true;
+        }
+        afterLevelUp();
+    }
+
     public void levelSize()
     {
         golfBall.transform.localScale += scaleChange;
@@ -74,14 +92,14 @@ public class GameLogicScript : MonoBehaviour
     public void levelJumbotron()
     {
 
-        if (Added == true)
+        if (JumbotronAdded == true)
         {
             bat.GetComponent<batScript>().jumbotronMax--;
         }
         else
         {
             bat.GetComponent<batScript>().jumbotronMax = 10;
-            Added = true;
+            JumbotronAdded = true;
         }
         afterLevelUp();
     }
@@ -141,6 +159,10 @@ public class GameLogicScript : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        
+    }
     void Start()
     {
         golfBall.transform.localScale = new Vector3(1.25f, 1.25f, 1);

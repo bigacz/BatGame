@@ -32,6 +32,7 @@ public class batScript : MonoBehaviour
     public Vector3 ballPositon;
     public Vector2 hitDirection;
     public float hitAngle;
+    public GameObject firework;
 
     // Jumbotron //
     public  int jumbotronMax;
@@ -47,12 +48,15 @@ public class batScript : MonoBehaviour
                 gameLogicScript.Jumbotron();
                 jumbotronCount = 0;
             }
-            collider.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            ballPositon = collider.transform.position;
-            hitDirection = ballPositon - heroBack.transform.position;
-            hitAngle = Mathf.Atan2(hitDirection.y, hitDirection.x) * Mathf.Rad2Deg;
-            AddForceAtAngle(hitForce, hitAngle, collider.GetComponent<Rigidbody2D>());
-            hitSFX.Play();
+            if (collider.gameObject != firework) 
+            {
+                collider.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                ballPositon = collider.transform.position;
+                hitDirection = ballPositon - heroBack.transform.position;
+                hitAngle = Mathf.Atan2(hitDirection.y, hitDirection.x) * Mathf.Rad2Deg;
+                AddForceAtAngle(hitForce, hitAngle, collider.GetComponent<Rigidbody2D>());
+                hitSFX.Play();
+            }
         }
     }
 

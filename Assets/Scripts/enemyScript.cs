@@ -33,6 +33,7 @@ public class enemyScript : MonoBehaviour
     {
         hero = GameObject.Find("Hero");
         gameLogicScript = GameObject.Find("GameLogic").GetComponent<GameLogicScript>();
+        bat = GameObject.Find("Bat");
         Physics2D.IgnoreLayerCollision(7, 8);
         Physics2D.IgnoreLayerCollision(7, 6);
 
